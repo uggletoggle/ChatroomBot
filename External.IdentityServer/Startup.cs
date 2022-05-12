@@ -1,15 +1,19 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using External.IdentityServer.Data;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using External.IdentityServer.Models;
 
 namespace External.IdentityServer
 {
@@ -27,6 +31,40 @@ namespace External.IdentityServer
         {
 
             services.AddControllers();
+            services.AddDbContext<AccountDbContext>(options =>
+            {
+                options.UseInMemoryDatabase("AccountDB");
+            });
+            
+            services.AddIdentity<AppUser, IdentityRole>(config =>
+            {
+                config.Password.RequiredLength = 4;
+                config.Password.RequireDigit = false;
+                config.Password.RequireNonAlphanumeric = false;
+                config.Password.RequireLowercase = false;
+                config.Password.RequireUppercase = false;
+            })
+               .AddEntityFrameworkStores<AccountDbContext>()
+               .AddDefaultTokenProviders();
+
+            services.AddIdentityServer()
+                .AddAspNetIdentity<AppUser>()
+                .AddConfigurationStore(options =>
+                {
+                    options.ConfigureDbContext = b =>
+                    {
+                        b.UseInMemoryDatabase("AccountDB");
+                    };
+                })
+                .AddOperationalStore(options =>
+                {
+                    options.ConfigureDbContext = b =>
+                    {
+                        b.UseInMemoryDatabase("AccountDB");
+                    };
+                })
+                .AddDeveloperSigningCredential();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "External.IdentityServer", Version = "v1" });
@@ -43,7 +81,11 @@ namespace External.IdentityServer
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "External.IdentityServer v1"));
             }
 
+            app.UseHttpsRedirection();
+
             app.UseRouting();
+
+            app.UseIdentityServer();
 
             app.UseAuthorization();
 
@@ -51,6 +93,8 @@ namespace External.IdentityServer
             {
                 endpoints.MapControllers();
             });
+
+            InitDb.SeedData(app);
         }
     }
 }

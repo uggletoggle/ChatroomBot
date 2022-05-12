@@ -1,8 +1,12 @@
 ﻿using FileHelpers;
+using IdentityModel;
+using IdentityModel.Client;
+using IdentityServer4.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace ChatroomBot.Robot
 {
@@ -12,29 +16,42 @@ namespace ChatroomBot.Robot
         {
             //if (args.Length > 0 && args.ToList().Contains("--stock"))
             //{
-                var client = new HttpClient();
+            var client = new HttpClient();
 
-                client.BaseAddress = new Uri("https://stooq.com/q/l/");
-
-                string stockCode = "msft.us";
-
-                var response = await client.GetAsync($"?s={stockCode}&f=sd2t2ohlcv&h&e=csv");
-
-                var file = await response.Content.ReadAsStringAsync();
-
-                var fileHelperEngine = new FileHelperEngine<Record>();
-                var records = fileHelperEngine.ReadString(file);
-
-                foreach (var record in records)
-                {
-                    Console.WriteLine(record);
-                }
-
-            Console.WriteLine(file);
+            //Task.Delay(5000).Wait();
+            //var tokenResponse = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
+            //{
+            //    Address = "https://localhost:44390/connect/token",
+            //    ClientId = "m2m.client",
+            //    ClientSecret = "secret",
+            //    Scope = "Chatroom.API"
+            //});
 
 
-
+            //if (tokenResponse.IsError)
+            //{
+            //    Console.WriteLine(tokenResponse.Error);
+            //    return;
             //}
+
+            //Console.WriteLine(tokenResponse.Json);
+
+
+            client.BaseAddress = new Uri("https://stooq.com/q/l/");
+
+            string stockCode = "appl.us";
+
+            var response = await client.GetAsync($"?s={stockCode}&f=sd2t2ohlcv&h&e=csv");
+
+            var file = await response.Content.ReadAsStringAsync();
+
+            var fileHelperEngine = new FileHelperEngine<Record>();
+            var records = fileHelperEngine.ReadString(file);
+
+            foreach (var record in records)
+            {
+                Console.WriteLine(record);
+            }
         }
     }
 
