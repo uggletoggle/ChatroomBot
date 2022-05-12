@@ -11,11 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatroomBot.Robot", "Chatro
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MessageQueue", "MessageQueue", "{6AFE0EDD-2F8B-42A3-801D-88540E93CD68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageQueue.Abstractions", "..\MessageQueue.Abstractions\MessageQueue.Abstractions.csproj", "{5BD8F84C-5DAC-4D0B-A67D-74ED1223BF79}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageQueue.Abstractions", ".\MessageQueue.Abstractions\MessageQueue.Abstractions.csproj", "{5BD8F84C-5DAC-4D0B-A67D-74ED1223BF79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageQueue.Producer", "..\MessageQueue.Producer\MessageQueue.Producer.csproj", "{C211F384-08BC-4858-B40A-24768C2552DE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageQueue.Producer", ".\MessageQueue.Producer\MessageQueue.Producer.csproj", "{C211F384-08BC-4858-B40A-24768C2552DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageQueue.Consumer", "..\MessageQueue.Consumer\MessageQueue.Consumer.csproj", "{B9B6FAA6-DB86-4399-93F5-8ABB33A666CA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageQueue.Consumer", ".\MessageQueue.Consumer\MessageQueue.Consumer.csproj", "{B9B6FAA6-DB86-4399-93F5-8ABB33A666CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
