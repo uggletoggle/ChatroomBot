@@ -2,7 +2,7 @@
 using ChatroomBot.API.Hubs;
 using ChatroomBot.API.Models;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.Extensions.DependencyInjection;
+
 using System;
 using System.Text.Json;
 
