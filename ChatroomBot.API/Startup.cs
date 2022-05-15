@@ -1,17 +1,15 @@
+using ChatroomBot.API.Data;
+using ChatroomBot.API.EventProcessing;
 using ChatroomBot.API.Hubs;
+using ChatroomBot.API.Integration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ChatroomBot.API
 {
@@ -24,17 +22,33 @@ namespace ChatroomBot.API
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
             services.AddControllers();
             services.AddSignalR();
-            services.AddCors();
+
+            services.AddCors(o => o.AddPolicy("DeveloperPolicy", builder =>
+            {
+                builder.WithOrigins("https://localhost:4200");
+                builder.AllowAnyHeader();
+                builder.AllowCredentials();
+                builder.AllowAnyMethod();
+            }));
+
+            services.AddSingleton<IEventProcessor, EventProcessor>();
+            services.AddSingleton<IMessageBusClient, MessageBusClient>();
+            services.AddHostedService<MessageBusSubscriber>();
+
+            services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseInMemoryDatabase("ChatDB");
+            });
+
             services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", options =>
                 {
-                    options.Authority = "https://localhost:44390";
+                    options.Authority = "https://localhost:44349";
 
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
@@ -55,14 +69,9 @@ namespace ChatroomBot.API
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ChatroomBot.API v1"));
-                app.UseCors(builder =>
-                {
-                    builder.WithOrigins("null")
-                    .AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .AllowCredentials();
-                });
             }
+
+            app.UseCors("DeveloperPolicy");
 
             app.UseRouting();
 
