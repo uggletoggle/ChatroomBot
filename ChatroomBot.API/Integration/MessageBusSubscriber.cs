@@ -3,7 +3,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using System;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,7 +14,6 @@ namespace ChatroomBot.API.Integration
         private readonly IConfiguration _configuration;
         private readonly IEventProcessor _eventProcessor;
         private IConnection _connection;
-        private string _queueName;
         private IModel _channel;
 
         public MessageBusSubscriber(

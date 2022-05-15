@@ -31,7 +31,8 @@ namespace External.IdentityServerUI.Controllers
                 return Redirect(loginVm.ReturnUrl);
             }
 
-            return View();
+            ViewBag.Error = "Invalid credentials";
+            return View(new LoginViewModel { ReturnUrl = loginVm.ReturnUrl });
         }
     }
 }

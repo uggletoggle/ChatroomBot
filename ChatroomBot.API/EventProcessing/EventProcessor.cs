@@ -19,6 +19,7 @@ namespace ChatroomBot.API.EventProcessing
         public void ProcessEvent(string message)
         {
             var eventType = GetEventType(message);
+            Message messageEntity;
 
             switch (eventType)
             {
@@ -26,7 +27,7 @@ namespace ChatroomBot.API.EventProcessing
                     var messageObj = JsonSerializer.Deserialize<CurrentRecordValueMessage>(message);
                     var messageTextFormatted = ConstructMessageFromEvent(messageObj);
 
-                    var messageEntity = new Message
+                    messageEntity = new Message
                     {
                         Text = messageTextFormatted,
                         User = "StockBot",
@@ -37,9 +38,31 @@ namespace ChatroomBot.API.EventProcessing
                     ;break;
 
                 case EventType.NotFoundValue:
-                    Console.WriteLine(message);
-                    ;break;
-             
+                    var messageObjNotFound = JsonSerializer.Deserialize<NotFoundValueMessage>(message);
+
+                    messageEntity = new Message
+                    {
+                        Text = $"Not found current value for {messageObjNotFound.Symbol}. Check format and spelling and try again.",
+                        User = "StockBot",
+                        Timestamp = DateTime.UtcNow
+                    };
+
+                    _hubContext.Clients.All.SendAsync("ReceiveMessage", messageEntity);
+                    ; break;
+
+                case EventType.RobotWorkerError:
+                    var messageObjRobotError = JsonSerializer.Deserialize<RobotWorkerErrorMessage>(message);
+
+                    messageEntity = new Message
+                    {
+                        Text = $"ERROR --> {messageObjRobotError.ExceptionType} - {messageObjRobotError.Description}",
+                        User = "StockBot",
+                        Timestamp = DateTime.UtcNow
+                    };
+
+                    _hubContext.Clients.All.SendAsync("ReceiveMessage", messageEntity);
+                    ; break;
+
                 default:
                     Console.WriteLine("--> Event Type not supported")
                     ;break;
@@ -58,6 +81,8 @@ namespace ChatroomBot.API.EventProcessing
                     return EventType.CurrentStockValue;
                 case "NotFoundValue":
                     return EventType.NotFoundValue;
+                case "RobotWorkerError":
+                    return EventType.RobotWorkerError;
                 default:
                     return EventType.Undetermined;
             }
@@ -67,6 +92,7 @@ namespace ChatroomBot.API.EventProcessing
     {
         CurrentStockValue,
         NotFoundValue,
+        RobotWorkerError,
         Undetermined
     }
 }

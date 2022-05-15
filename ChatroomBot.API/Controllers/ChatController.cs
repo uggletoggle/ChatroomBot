@@ -1,8 +1,10 @@
 ﻿using ChatroomBot.API.Data;
 using ChatroomBot.API.Entities;
+using ChatroomBot.API.Helpers;
 using ChatroomBot.API.Hubs;
 using ChatroomBot.API.Integration;
 using ChatroomBot.API.Models;
+using ChatroomBot.API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
@@ -19,79 +21,42 @@ namespace ChatroomBot.API.Controllers
     [Route("api/chatroom")]
     public class ChatController : ControllerBase
     {
-        private readonly IHubContext<ChatHub> _chatroom;
-        private readonly IMessageBusClient _messageBusClient;
+        private readonly IChatService _chatService;
 
         public ChatController(
-            IMessageBusClient messageBusClient,
-            IHubContext<ChatHub> chatroom)
+            IChatService chatService)
         {
-            _chatroom = chatroom;
-            _messageBusClient = messageBusClient;
+            _chatService = chatService;
         }
 
-        [HttpPost("[action]/{connectionId}/{chatroom}")]
-        public async Task<IActionResult> JoinChat(string connectionId, string chatroom)
-        {
-            await _chatroom.Groups.AddToGroupAsync(connectionId, chatroom);
-            return Ok();
-        }
 
-        [HttpPost("[action]/{connectionId}/{chatroom}")]
-        public async Task<IActionResult> LeaveChat(string connectionId, string chatroom)
-        {
-            await _chatroom.Groups.RemoveFromGroupAsync(connectionId, chatroom);
-            return Ok();
-        }
+        //[HttpPost("[action]/{connectionId}/{chatroom}")]
+        //public async Task<IActionResult> JoinChat(string connectionId, string chatroom)
+        //{
+        //    await _chatroom.Groups.AddToGroupAsync(connectionId, chatroom);
+        //    return Ok();
+        //}
+
+        //[HttpPost("[action]/{connectionId}/{chatroom}")]
+        //public async Task<IActionResult> LeaveChat(string connectionId, string chatroom)
+        //{
+        //    await _chatroom.Groups.RemoveFromGroupAsync(connectionId, chatroom);
+        //    return Ok();
+        //}
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> SendMessage([FromBody] MessageDto message,
-            [FromServices] AppDbContext context)
+        public async Task<IActionResult> SendMessage([FromBody] MessageDto message)
         {
-            var isAskingForStock = message.Message
-                .Trim()
-                .StartsWith("/stock=");
-
-            var messageEntity = new Message
-            {
-                Text = message.Message,
-                User = HttpContext.User.Claims
-                    .Where( c => c.Type == "username")
-                    .Select( c => c.Value)
-                    .FirstOrDefault(),
-                Timestamp = DateTime.UtcNow
-            };
-
-            if (isAskingForStock)
-            {
-                var stock = message.Message
-                .Trim().ToLower().Substring(7);
-
-                if (HasValidStockCodeFormat(stock))
-                {
-                    try
-                    {
-                        _messageBusClient.PublishAskForStockMessage(new AskForStockMessage { stock = stock });
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("--> Could not enqueue ask for stock message {0}", ex.Message);
-                    }
-                }
-            }
-            else
-            {
-                context.Messages.Add(messageEntity);
-                await context.SaveChangesAsync();
-            }
+            var user = GetUserNameFromContext();
+            await _chatService.HandleMessage(message, user);
             
-            await _chatroom.Clients.All.SendAsync("ReceiveMessage",  messageEntity);
             return Ok();
         }
 
-        private bool HasValidStockCodeFormat(string stock)
-        {
-            return Regex.IsMatch(stock, @"[a-z]{1,5}.[a-z]{2}");
-        }
+        private string GetUserNameFromContext() => HttpContext.User.Claims
+                    .Where(c => c.Type == "username")
+                    .Select(c => c.Value)
+                    .FirstOrDefault();
+
     }
 }

@@ -2,6 +2,7 @@ using ChatroomBot.API.Data;
 using ChatroomBot.API.EventProcessing;
 using ChatroomBot.API.Hubs;
 using ChatroomBot.API.Integration;
+using ChatroomBot.API.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,9 @@ namespace ChatroomBot.API
 
             services.AddControllers();
             services.AddSignalR();
+
+            services.AddScoped<IChatRepository, ChatRepository>();
+            services.AddScoped<IChatService, ChatService>();
 
             services.AddCors(o => o.AddPolicy("DeveloperPolicy", builder =>
             {

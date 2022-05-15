@@ -1,4 +1,4 @@
-﻿namespace ChatroomBot.Robot
+﻿namespace ChatroomBot.Robot.Messages
 {
     public class CurrentRecordValueMessage : GenericEvent
     {
