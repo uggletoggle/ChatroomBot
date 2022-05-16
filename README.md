@@ -22,7 +22,7 @@ Angular client provides basic route security to access chatroom, obtaining crede
 
 ## Application flow
 
-![alt text](https://i.ibb.co/bF6Pddz/simplified.png)
+![alt text](https://i.ibb.co/61sT225/simplified.png)
 
 ## Basic setup
 The project uses In memory databases for simplicity purposes. This databases are seeded for direct testing with two users:
