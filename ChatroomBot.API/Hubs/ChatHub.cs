@@ -20,18 +20,5 @@ namespace ChatroomBot.API.Hubs
             Clients.Caller.SendAsync("ReceiveConnID", Context.ConnectionId);
             return base.OnConnectedAsync();
         }
-
-        public async Task SendMessage(string user, string message)
-        {
-            var messageEntity = new Message
-            {
-                User = user,
-                Text = message,
-                Timestamp = DateTime.UtcNow
-            };
-            await _context.Messages.AddAsync(messageEntity);
-
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
-        }
     }
 }
