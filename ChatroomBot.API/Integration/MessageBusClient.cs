@@ -1,4 +1,5 @@
 ﻿using ChatroomBot.API.Models;
+using ChatroomBot.Common.Messages;
 using Microsoft.Extensions.Configuration;
 using RabbitMQ.Client;
 using System;

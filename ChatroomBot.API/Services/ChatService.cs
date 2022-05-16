@@ -4,6 +4,7 @@ using ChatroomBot.API.Helpers;
 using ChatroomBot.API.Hubs;
 using ChatroomBot.API.Integration;
 using ChatroomBot.API.Models;
+using ChatroomBot.Common.Messages;
 using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;

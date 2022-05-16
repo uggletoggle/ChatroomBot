@@ -16,12 +16,14 @@
         <tr>
             <td style="width: 100px">From</td>
             <td>Message</td>
+            <td>Timestamp</td>
         </tr>
       </thead>
       <tbody id="commsLog" >
         <tr *ngFor="let message of messages">
           <td style="width: 100px">{{ message.user }}</td>
           <td> {{ message.text }} </td>
+          <td> {{ message.timestamp}} </td>
         </tr>
       </tbody>
     </table>

@@ -29,7 +29,7 @@ export class SignalrService {
       });
 
       this.hubConnection.on('ReceiveMessage', (message) => {
-        console.log(message);
+        console.log('from bot ' + message)
         this.chatSvc.addMessage(message);
       });
 

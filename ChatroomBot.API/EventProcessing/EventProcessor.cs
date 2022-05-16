@@ -1,6 +1,7 @@
 ﻿using ChatroomBot.API.Entities;
 using ChatroomBot.API.Hubs;
 using ChatroomBot.API.Models;
+using ChatroomBot.Common.Messages;
 using Microsoft.AspNetCore.SignalR;
 
 using System;

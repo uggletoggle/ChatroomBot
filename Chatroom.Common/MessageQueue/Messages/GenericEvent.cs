@@ -1,4 +1,4 @@
-﻿namespace ChatroomBot.API.Models
+﻿namespace ChatroomBot.Common.Messages
 {
     public class GenericEvent
     {

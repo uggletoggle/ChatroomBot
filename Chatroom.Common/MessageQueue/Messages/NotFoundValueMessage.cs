@@ -1,4 +1,4 @@
-﻿namespace ChatroomBot.Robot.Messages
+﻿namespace ChatroomBot.Common.Messages
 {
     public class NotFoundValueMessage : GenericEvent
     {

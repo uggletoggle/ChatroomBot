@@ -26,6 +26,8 @@ export class ChatService {
       messages.pop();
     }
 
+    console.log(message.text)
+
     messages.unshift(message);
 
     this.messages.next(messages);

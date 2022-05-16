@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using ChatroomBot.Robot.Integration;
+using Microsoft.Extensions.Configuration;
 using System;
 
 namespace ChatroomBot.Robot

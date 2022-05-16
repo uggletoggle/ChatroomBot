@@ -1,4 +1,5 @@
-﻿using ChatroomBot.Robot.Messages;
+﻿using ChatroomBot.Common.Messages;
+using ChatroomBot.Robot.Models;
 using FileHelpers;
 using Microsoft.Extensions.Configuration;
 using RabbitMQ.Client;
@@ -8,7 +9,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 
-namespace ChatroomBot.Robot
+namespace ChatroomBot.Robot.Integration
 {
     public class MessageBusClient : IMessageBusClient, IDisposable
     {
@@ -69,7 +70,7 @@ namespace ChatroomBot.Robot
                         {
                             if (double.TryParse(record.Close.Replace('.', ','), out double close))
                             {
-                                PublishCurrentRecordValue(new CurrentRecordValueMessage
+                                PublishMessage(new CurrentRecordValueMessage
                                 {
                                     Close = close,
                                     Symbol = record.Symbol
@@ -77,7 +78,7 @@ namespace ChatroomBot.Robot
                             }
                             else
                             {
-                                PublishNotFoundValue(new NotFoundValueMessage
+                                PublishMessage(new NotFoundValueMessage
                                 {
                                     Symbol = record.Symbol
                                 });
@@ -86,7 +87,7 @@ namespace ChatroomBot.Robot
                     }
                     catch (Exception ex)
                     {
-                        PublishRobotWorkerError(new RobotWorkerErrorMessage
+                        PublishMessage(new RobotWorkerErrorMessage
                         {
                             ExceptionType = ex.GetType().Name,
                             Description = ex.Message
@@ -106,7 +107,7 @@ namespace ChatroomBot.Robot
             }
         }
 
-        private void PublishRobotWorkerError(RobotWorkerErrorMessage message)
+        public void PublishMessage<T>(T message) where T : GenericEvent
         {
             var jsonMessage = JsonSerializer.Serialize(message);
 
@@ -115,27 +116,6 @@ namespace ChatroomBot.Robot
                 SendMessage(jsonMessage);
             }
         }
-
-        private void PublishNotFoundValue(NotFoundValueMessage message)
-        {
-            var jsonMessage = JsonSerializer.Serialize(message);
-
-            if (_connection.IsOpen)
-            {
-                SendMessage(jsonMessage);
-            }
-        }
-
-        public void PublishCurrentRecordValue(CurrentRecordValueMessage message)
-        {
-            var jsonMessage = JsonSerializer.Serialize(message);
-
-            if (_connection.IsOpen)
-            {
-                SendMessage(jsonMessage);
-            }
-        }
-
         private void SendMessage(string message)
         {
             var body = Encoding.UTF8.GetBytes(message);

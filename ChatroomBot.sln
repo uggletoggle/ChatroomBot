@@ -7,15 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatroomBot.API", "Chatroom
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatroomBot.Robot", "ChatroomBot.Robot\ChatroomBot.Robot.csproj", "{DF85C106-A2DC-4A35-9490-B0ABFB3C204B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MessageQueue", "MessageQueue", "{6AFE0EDD-2F8B-42A3-801D-88540E93CD68}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageQueue.Abstractions", "MessageQueue.Abstractions\MessageQueue.Abstractions.csproj", "{5BD8F84C-5DAC-4D0B-A67D-74ED1223BF79}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageQueue.Producer", "MessageQueue.Producer\MessageQueue.Producer.csproj", "{C211F384-08BC-4858-B40A-24768C2552DE}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageQueue.Consumer", "MessageQueue.Consumer\MessageQueue.Consumer.csproj", "{B9B6FAA6-DB86-4399-93F5-8ABB33A666CA}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "External.IdentityServerUI", "External.IdentityServerUI\External.IdentityServerUI.csproj", "{AC1D779C-9E72-4763-9DCA-6FE5B2F37955}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chatroom.Common", "Chatroom.Common\Chatroom.Common.csproj", "{21983712-FF23-45E0-875D-ADEA1A8F5A6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,30 +25,17 @@ Global
 		{DF85C106-A2DC-4A35-9490-B0ABFB3C204B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF85C106-A2DC-4A35-9490-B0ABFB3C204B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF85C106-A2DC-4A35-9490-B0ABFB3C204B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5BD8F84C-5DAC-4D0B-A67D-74ED1223BF79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5BD8F84C-5DAC-4D0B-A67D-74ED1223BF79}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5BD8F84C-5DAC-4D0B-A67D-74ED1223BF79}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5BD8F84C-5DAC-4D0B-A67D-74ED1223BF79}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C211F384-08BC-4858-B40A-24768C2552DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C211F384-08BC-4858-B40A-24768C2552DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C211F384-08BC-4858-B40A-24768C2552DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C211F384-08BC-4858-B40A-24768C2552DE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B9B6FAA6-DB86-4399-93F5-8ABB33A666CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B9B6FAA6-DB86-4399-93F5-8ABB33A666CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B9B6FAA6-DB86-4399-93F5-8ABB33A666CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B9B6FAA6-DB86-4399-93F5-8ABB33A666CA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AC1D779C-9E72-4763-9DCA-6FE5B2F37955}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AC1D779C-9E72-4763-9DCA-6FE5B2F37955}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC1D779C-9E72-4763-9DCA-6FE5B2F37955}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC1D779C-9E72-4763-9DCA-6FE5B2F37955}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21983712-FF23-45E0-875D-ADEA1A8F5A6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21983712-FF23-45E0-875D-ADEA1A8F5A6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21983712-FF23-45E0-875D-ADEA1A8F5A6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21983712-FF23-45E0-875D-ADEA1A8F5A6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{5BD8F84C-5DAC-4D0B-A67D-74ED1223BF79} = {6AFE0EDD-2F8B-42A3-801D-88540E93CD68}
-		{C211F384-08BC-4858-B40A-24768C2552DE} = {6AFE0EDD-2F8B-42A3-801D-88540E93CD68}
-		{B9B6FAA6-DB86-4399-93F5-8ABB33A666CA} = {6AFE0EDD-2F8B-42A3-801D-88540E93CD68}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D6BF80FD-9DE5-42C6-B874-1675A9C60191}

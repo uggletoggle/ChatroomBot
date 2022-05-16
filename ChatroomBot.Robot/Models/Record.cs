@@ -1,6 +1,6 @@
 ﻿using FileHelpers;
 
-namespace ChatroomBot.Robot
+namespace ChatroomBot.Robot.Models
 {
     [DelimitedRecord(",")]
     [IgnoreFirst(1)]
