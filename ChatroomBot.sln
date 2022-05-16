@@ -17,27 +17,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageQueue.Consumer", "Me
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "External.IdentityServerUI", "External.IdentityServerUI\External.IdentityServerUI.csproj", "{AC1D779C-9E72-4763-9DCA-6FE5B2F37955}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "chatroom-client", "chatroom-client\", "{90A20D59-3F1F-48E7-8E79-99725EBD55BA}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_58964"
-		Debug.AspNetCompiler.PhysicalPath = "chatroom-client\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_58964\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_58964"
-		Release.AspNetCompiler.PhysicalPath = "chatroom-client\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_58964\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "58964"
-		SlnRelativePath = "chatroom-client\"
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,10 +47,6 @@ Global
 		{AC1D779C-9E72-4763-9DCA-6FE5B2F37955}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC1D779C-9E72-4763-9DCA-6FE5B2F37955}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC1D779C-9E72-4763-9DCA-6FE5B2F37955}.Release|Any CPU.Build.0 = Release|Any CPU
-		{90A20D59-3F1F-48E7-8E79-99725EBD55BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{90A20D59-3F1F-48E7-8E79-99725EBD55BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{90A20D59-3F1F-48E7-8E79-99725EBD55BA}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{90A20D59-3F1F-48E7-8E79-99725EBD55BA}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

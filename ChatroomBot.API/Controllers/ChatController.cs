@@ -1,16 +1,8 @@
-﻿using ChatroomBot.API.Data;
-using ChatroomBot.API.Entities;
-using ChatroomBot.API.Helpers;
-using ChatroomBot.API.Hubs;
-using ChatroomBot.API.Integration;
-using ChatroomBot.API.Models;
+﻿using ChatroomBot.API.Models;
 using ChatroomBot.API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
-using System;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ChatroomBot.API.Controllers
@@ -44,12 +36,18 @@ namespace ChatroomBot.API.Controllers
         //    return Ok();
         //}
 
+        [HttpGet]
+        public IActionResult GetMessages()
+        {
+            return Ok(_chatService.GetMessages());
+        }
+
         [HttpPost("[action]")]
         public async Task<IActionResult> SendMessage([FromBody] MessageDto message)
         {
             var user = GetUserNameFromContext();
             await _chatService.HandleMessage(message, user);
-            
+
             return Ok();
         }
 

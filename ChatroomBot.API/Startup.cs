@@ -34,7 +34,7 @@ namespace ChatroomBot.API
 
             services.AddCors(o => o.AddPolicy("DeveloperPolicy", builder =>
             {
-                builder.WithOrigins("https://localhost:4200");
+                builder.WithOrigins(Configuration.GetValue<string>("ChatroomClientUrl"));
                 builder.AllowAnyHeader();
                 builder.AllowCredentials();
                 builder.AllowAnyMethod();
@@ -49,10 +49,12 @@ namespace ChatroomBot.API
                 options.UseInMemoryDatabase("ChatDB");
             });
 
+            var authenticationSettings = Configuration.GetSection("Authentication");
+
             services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", options =>
                 {
-                    options.Authority = "https://localhost:44349";
+                    options.Authority = authenticationSettings.GetValue<string>("Authority");
 
                     options.TokenValidationParameters = new TokenValidationParameters
                     {

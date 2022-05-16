@@ -1,10 +1,12 @@
 ﻿using ChatroomBot.API.Data;
+using ChatroomBot.API.Entities;
 using ChatroomBot.API.Helpers;
 using ChatroomBot.API.Hubs;
 using ChatroomBot.API.Integration;
 using ChatroomBot.API.Models;
 using Microsoft.AspNetCore.SignalR;
 using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -24,6 +26,11 @@ namespace ChatroomBot.API.Services
             _chatRepo = chatRepo;
             _chatroom = chatroom;
             _messageBusClient = messageBusClient;
+        }
+
+        public IEnumerable<Message> GetMessages()
+        {
+            return _chatRepo.GetMessages();
         }
 
         public async Task HandleMessage(MessageDto message, string user)
