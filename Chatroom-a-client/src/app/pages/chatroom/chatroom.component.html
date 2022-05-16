@@ -1,0 +1,29 @@
+<h1>Chatroom Angular Client</h1>
+<p id="stateLabel">Ready to send messages</p>
+<p id="connIDLabel">ConnID: {{ connId }}</p>
+<pre>Try send /stock='stock code' to obtain the current quote value per share</pre>
+<p></p>
+<div>
+    <label for="sendMessage">Message:</label>
+    <input id="sendMessage" [(ngModel)]="inputMessage" />
+    <button id="sendButton" (click)="sendMessage()">Send</button>
+</div>
+<p></p>
+<h2>Communication Log</h2>
+<div  style="max-width:800px;max-height:350px; scroll-behavior: auto;overflow-x:hidden; overflow-y: scroll; border: 1px black solid; padding: 5px;">
+  <table style="width: 800px;">
+    <thead>
+        <tr>
+            <td style="width: 100px">From</td>
+            <td>Message</td>
+        </tr>
+      </thead>
+      <tbody id="commsLog" >
+        <tr *ngFor="let message of messages">
+          <td style="width: 100px">{{ message.user }}</td>
+          <td> {{ message.text }} </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<p></p>

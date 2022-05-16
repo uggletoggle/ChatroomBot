@@ -1,0 +1,29 @@
+
+html,body {
+  min-height: 100vh;
+  height:100%;
+  width:100%;
+  position: relative;
+}
+
+.main-container{
+  position: absolute;
+  left:50%;
+  top:50%;
+  transform: translate(-50%,-50%);
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.access-button {
+  background-color: whitesmoke;
+  padding: 25px;
+  border: none;
+  color: rgba(10, 10, 10, 0.664)
+}
+
+.access-button:hover {
+  color: rgba(10, 10, 10, 1);
+}
