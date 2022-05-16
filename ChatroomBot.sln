@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "External.IdentityServerUI",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chatroom.Common", "Chatroom.Common\Chatroom.Common.csproj", "{21983712-FF23-45E0-875D-ADEA1A8F5A6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chatroom.Tests", "..\Chatroom.Tests\Chatroom.Tests.csproj", "{C0A2467B-AD09-409D-B938-B2EA81F4E144}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chatroom.Tests", "Chatroom.Tests\Chatroom.Tests.csproj", "{C0A2467B-AD09-409D-B938-B2EA81F4E144}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
