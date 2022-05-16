@@ -20,6 +20,10 @@ An .NET 5 Identity server grant users to connect to the chatroom, serving as aut
 
 Angular client provides basic route security to access chatroom, obtaining credentials token through authentication with Identity server.
 
+## Application flow
+
+![alt text](https://i.ibb.co/bF6Pddz/simplified.png)
+
 ## Basic setup
 The project uses In memory databases for simplicity purposes. This databases are seeded for direct testing with two users:
 - user: boya password: 123456
