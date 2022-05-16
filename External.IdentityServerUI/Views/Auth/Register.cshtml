@@ -1,11 +1,11 @@
-﻿@model LoginViewModel
+﻿@model RegisterViewModel
 
 @{
     Layout = "_Layout";
 }
 
 <h2>Identity Server</h2>
-<form asp-controller="Auth" asp-action="Login" method="post">
+<form asp-controller="Auth" asp-action="Register" method="post">
     <input type="hidden" asp-for="ReturnUrl" />
     <!-- Email input -->
     <div class="form-outline mb-4">
@@ -17,6 +17,14 @@
     <div class="form-outline mb-4">
         <label class="form-label">Password</label>
         <input class="form-control" type="password" asp-for="Password" />
+        <span asp-validation-for="Password"></span>
+    </div>
+
+    <!-- Confirm Password input -->
+    <div class="form-outline mb-4">
+        <label class="form-label">Confirm Password</label>
+        <input class="form-control" type="password" asp-for="ConfirmPassword" />
+        <span asp-validation-for="Password"></span>
     </div>
 
     <div>
@@ -26,8 +34,6 @@
         }
     </div>
 
-    <a asp-controller="Auth" asp-action="Register" asp-route-returnUrl="@Model.ReturnUrl">Are you new? Register first</a>
-
     <!-- Submit button -->
-    <button type="submit" class="btn btn-primary btn-block mb-4">Login</button>
+    <button type="submit" class="btn btn-primary btn-block mb-4">Sign up</button>
 </form>
